@@ -14,7 +14,7 @@ class Expression:
         if isinstance(other, n.Number):
             other = Number(other)
         return Add(self, other)
-    
+
     def __radd__(self, other):
         """Define addition if called on non-expressions."""
         if isinstance(other, n.Number):
@@ -81,7 +81,7 @@ class Operator(Expression):
         """Give human readable string representation."""
         b = [False, False]
         for i in range(2):
-            if type(self.operands[i]).precedence < type(self).precedence:
+            if type(self.operands[i]).precendence < type(self).precendence:
                 b[i] = True
 
         if b == [True, True]:
