@@ -19,7 +19,7 @@ class Expression:
         """Define addition if called on non-expressions."""
         if isinstance(other, n.Number):
             other = Number(other)
-        return Add(self, other)
+        return Add(other, self)
 
     def __sub__(self, other):
         """Define substraction."""
@@ -43,7 +43,7 @@ class Expression:
         """Define multiplication if called on non-expressions."""
         if isinstance(other, n.Number):
             other = Number(other)
-        return Mul(self, other)
+        return Mul(other, self)
 
     def __truediv__(self, other):
         """Define division."""
