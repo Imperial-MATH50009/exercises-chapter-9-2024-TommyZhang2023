@@ -81,7 +81,7 @@ class Operator(Expression):
         """Give human readable string representation."""
         b = [False, False]
         for i in range(2):
-            if type(self.operands[i]).precendence < type(self).precendence:
+            if type(self.operands[i]).precedence < type(self).precedence:
                 b[i] = True
 
         if b == [True, True]:
@@ -105,35 +105,35 @@ class Add(Operator):
     """Class for addition operation."""
 
     sym = "+"
-    precendence = 0
+    precedence = 0
 
 
 class Sub(Operator):
     """Class for substraction operation."""
 
     sym = "-"
-    precendence = 0
+    precedence = 0
 
 
 class Mul(Operator):
     """Class for multiplication operation."""
 
     sym = "*"
-    precendence = 1
+    precedence = 1
 
 
 class Div(Operator):
     """Class for division operation."""
 
     sym = "/"
-    precendence = 1
+    precedence = 1
 
 
 class Pow(Operator):
     """Class for exponenciation operation."""
 
     sym = "^"
-    precendence = 2
+    precedence = 2
 
 
 class Terminal(Expression):
