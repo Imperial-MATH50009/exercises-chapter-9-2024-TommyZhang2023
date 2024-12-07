@@ -10,44 +10,64 @@ class Expression:
         self.operands = operands
 
     def __add__(self, other):
-        """Define addition between expressions."""
-        if isinstance(self, n.Number):
-            self = Number(self)
+        """Define addition."""
+        if isinstance(other, n.Number):
+            other = Number(other)
+        return Add(self, other)
+    
+    def __radd__(self, other):
+        """Define addition if called on non-expressions."""
         if isinstance(other, n.Number):
             other = Number(other)
         return Add(self, other)
 
     def __sub__(self, other):
-        """Define substraction between expressions."""
-        if isinstance(self, n.Number):
-            self = Number(self)
+        """Define substraction."""
         if isinstance(other, n.Number):
             other = Number(other)
         return Sub(self, other)
 
+    def __rsub__(self, other):
+        """Define substraction if called on non-expressions."""
+        if isinstance(other, n.Number):
+            other = Number(other)
+        return Sub(other, self)
+
     def __mul__(self, other):
-        """Define multiplication between expressions."""
-        if isinstance(self, n.Number):
-            self = Number(self)
+        """Define multiplication."""
+        if isinstance(other, n.Number):
+            other = Number(other)
+        return Mul(self, other)
+
+    def __rmul__(self, other):
+        """Define multiplication if called on non-expressions."""
         if isinstance(other, n.Number):
             other = Number(other)
         return Mul(self, other)
 
     def __truediv__(self, other):
-        """Define division between expressions."""
-        if isinstance(self, n.Number):
-            self = Number(self)
+        """Define division."""
         if isinstance(other, n.Number):
             other = Number(other)
         return Div(self, other)
 
+    def __rtruediv__(self, other):
+        """Define division if called on non-expressions."""
+        if isinstance(other, n.Number):
+            other = Number(other)
+        return Div(other, self)
+
     def __pow__(self, other):
-        """Define exponentiation between expressions."""
-        if isinstance(self, n.Number):
-            self = Number(self)
+        """Define exponentiation."""
         if isinstance(other, n.Number):
             other = Number(other)
         return Pow(self, other)
+
+    def __rpow__(self, other):
+        """Define exponentiation if called on non-expressions."""
+        if isinstance(other, n.Number):
+            other = Number(other)
+        return Pow(other, self)
 
 
 class Operator(Expression):
