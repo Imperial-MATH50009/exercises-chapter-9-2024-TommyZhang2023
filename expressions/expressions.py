@@ -86,7 +86,7 @@ class Operator(Expression):
 
         if b == [True, True]:
             return "(" + str(self.operands[0]) + ")" + " " + type(self).sym \
-                  + " " + (" + str(self.operands[1]) + ")
+                  + " " + "(" + str(self.operands[1]) + ")"
 
         elif b == [True, False]:
             return "(" + str(self.operands[0]) + ")" + " " + type(self).sym \
