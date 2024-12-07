@@ -85,20 +85,20 @@ class Operator(Expression):
                 b[i] = True
 
         if b == [True, True]:
-            return "(" + str(self.operands[0]) + ")" + type(self).sym \
-                  + "(" + str(self.operands[1]) + ")"
+            return "(" + str(self.operands[0]) + ")" + " " + type(self).sym \
+                  + " " + (" + str(self.operands[1]) + ")
 
         elif b == [True, False]:
-            return "(" + str(self.operands[0]) + ")" + type(self).sym \
-                  + str(self.operands[1])
+            return "(" + str(self.operands[0]) + ")" + " " + type(self).sym \
+                  + " " + str(self.operands[1])
 
         elif b == [False, True]:
-            return str(self.operands[0]) + type(self).sym \
-                  + "(" + str(self.operands[1]) + ")"
+            return str(self.operands[0]) + " " + type(self).sym \
+                  + " " + "(" + str(self.operands[1]) + ")"
 
         else:
-            return str(self.operands[0]) + type(self).sym \
-                  + str(self.operands[1])
+            return str(self.operands[0]) + " " + type(self).sym \
+                  + " " + str(self.operands[1])
 
 
 class Add(Operator):
