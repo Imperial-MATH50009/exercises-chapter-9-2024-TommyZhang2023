@@ -182,4 +182,4 @@ def postvisitor(expr, fn, symbol_map):
             for uc in unvisited_children:
                 stack.append(uc)
         else:
-            visited[e] = fn(e, *(visited[o] for o in e.operands), **symbol_map)
+            visited[e] = fn(e, *(visited[o] for o in e.operands), symbol_map)
