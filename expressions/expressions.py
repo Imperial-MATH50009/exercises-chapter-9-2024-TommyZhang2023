@@ -218,8 +218,8 @@ def _(expr, *o, **kwarg):
 
 @ differentiate.register(Div)
 def _(expr, *o, **kwarg):
-    return o[0] / expr.operands[1] \
-        - o[1] * expr.operands[0] / (expr.operands[1])**2
+    return (o[0] * expr.operands[1] - o[1] * expr.operands[0]) \
+        / (expr.operands[1])**2
 
 
 @differentiate.register(Pow)
