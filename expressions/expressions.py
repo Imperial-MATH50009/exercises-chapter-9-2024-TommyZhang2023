@@ -165,7 +165,7 @@ class Symbol(Terminal):
     precedence = 3
 
 
-def postvisitor(expr, fn, symbol_map):
+def postvisitor(expr, fn, **kwarg):
     stack = []
     visited = dict()
     stack.append(expr)
@@ -182,4 +182,4 @@ def postvisitor(expr, fn, symbol_map):
             for uc in unvisited_children:
                 stack.append(uc)
         else:
-            visited[e] = fn(e, *(visited[o] for o in e.operands), symbol_map)
+            visited[e] = fn(e, *(visited[o] for o in e.operands), **kwarg)
