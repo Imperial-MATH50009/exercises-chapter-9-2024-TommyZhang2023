@@ -167,6 +167,7 @@ class Symbol(Terminal):
 
 
 def postvisitor(expr, fn, **kwarg):
+    """Postvisit without recursion."""
     stack = []
     visited = dict()
     stack.append(expr)
@@ -190,6 +191,7 @@ def postvisitor(expr, fn, **kwarg):
 
 @singledispatch
 def differentiate(expr, *o, **kwarg):
+    """Differentiate expressions."""
     raise NotImplementedError
 
 
@@ -216,7 +218,7 @@ def _(expr, *o, **kwarg):
     return o[0] * expr.operands[1] + o[1] * expr.operands[0]
 
 
-@ differentiate.register(Div)
+@differentiate.register(Div)
 def _(expr, *o, **kwarg):
     return (o[0] * expr.operands[1] - o[1] * expr.operands[0]) \
         / (expr.operands[1])**2
