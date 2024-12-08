@@ -183,3 +183,5 @@ def postvisitor(expr, fn, **kwarg):
                 stack.append(uc)
         else:
             visited[e] = fn(e, *(visited[o] for o in e.operands), **kwarg)
+
+    return visited[expr]
