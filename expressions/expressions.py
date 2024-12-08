@@ -189,17 +189,17 @@ def postvisitor(expr, fn, **kwarg):
 
 
 @singledispatch
-def differentiate(expr, var, *o):
+def differentiate(expr, *o, **kwarg):
     raise NotImplementedError
 
 
 @differentiate.register(Number)
-def _(expr, var, *o):
+def _(expr, *o, **kwarg):
     return 0
 
 
 @differentiate.register(Symbol)
-def _(expr, var, *o):
+def _(expr, var, *o, **kwarg):
     if expr.value == var:
         return 1
     else:
@@ -207,20 +207,20 @@ def _(expr, var, *o):
 
 
 @differentiate.register(Add)
-def _(expr, var, *o):
+def _(expr, *o, **kwarg):
     return o[0] + o[1]
 
 
 @differentiate.register(Mul)
-def _(expr, var, *o):
+def _(expr, *o, **kwarg):
     return o[0] * expr.operands[1] + o[1] * expr.operands[0]
 
 
 @ differentiate.register(Div)
-def _(expr, var, *o):
+def _(expr, *o, **kwarg):
     return o[0] / expr.operands[1] + o[1] / expr.operands[0]
 
 
 @differentiate.register(Pow)
-def _(expr, var, *o):
+def _(expr, *o, **kwarg):
     return o[0] * expr.operands[1] * expr.operands[0] ** (expr.operands[1] - 1)
