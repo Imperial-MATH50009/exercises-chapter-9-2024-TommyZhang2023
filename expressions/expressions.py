@@ -1,5 +1,6 @@
 """Module implementing symbolic mathematical expressions."""
 import numbers as n
+from functools import singledispatch
 
 
 class Expression:
@@ -185,3 +186,41 @@ def postvisitor(expr, fn, **kwarg):
             visited[e] = fn(e, *(visited[o] for o in e.operands), **kwarg)
 
     return visited[expr]
+
+
+@singledispatch
+def differentiate(expr, var, *o):
+    raise NotImplementedError
+
+
+@differentiate.register(Number)
+def _(expr, var, *o):
+    return 0
+
+
+@differentiate.register(Symbol)
+def _(expr, var, *o):
+    if expr.value == var:
+        return 1
+    else:
+        return 0
+
+
+@differentiate.register(Add)
+def _(expr, var, *o):
+    return o[0] + o[1]
+
+
+@differentiate.register(Mul)
+def _(expr, var, *o):
+    return o[0] * expr.operands[1] + o[1] * expr.operands[0]
+
+
+@ differentiate.register(Div)
+def _(expr, var, *o):
+    return o[0] / expr.operands[1] + o[1] / expr.operands[0]
+
+
+@differentiate.register(Pow)
+def _(expr, var, *o):
+    return o[0] * expr.operands[1] * expr.operands[0] ** (expr.operands[1] - 1)
