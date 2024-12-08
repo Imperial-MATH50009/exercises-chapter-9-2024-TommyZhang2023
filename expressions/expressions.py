@@ -163,3 +163,23 @@ class Symbol(Terminal):
     """Class for symbol terminal."""
 
     precedence = 3
+
+
+def postvisitor(expr, fn, **look_up):
+    stack = []
+    visited = dict()
+    stack.append(expr)
+
+    while stack:
+        e = stack.pop()
+        unvisited_children = []
+        for o in e.operands:
+            if o not in visited:
+                unvisited_children.append(o)
+
+        if unvisited_children:
+            stack.append(e)
+            for uc in unvisited_children:
+                stack.append(uc)
+        else:
+            visited[e] = fn(e, *(visited[o] for o in e.operands), **look_up)
